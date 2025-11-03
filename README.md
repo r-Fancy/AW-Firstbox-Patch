@@ -50,7 +50,7 @@ Some Weapons have a limit - WHICH IS NOT ALLOWED TO BE CHANGED. You know there's
 
 [rFancy](#)
 
-[ZiO](#)
+[ZiO](https://gist.github.com/Zi0MIX)
 
-[romain_lu](#)
+[romain_lu](https://www.twitch.tv/romain_lu)
 
