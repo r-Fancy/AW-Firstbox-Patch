@@ -16,7 +16,7 @@ Done!
 
 **Credit**
 
-[ZiO](https://gist.github.com/Zi0MIX) - *Fixed version of first box patch*
+[Zi0MIX](https://gist.github.com/Zi0MIX) - *Fixed version of first box patch*
 
 [romain_lu](https://www.twitch.tv/romain_lu) - *Weapon list*
 
