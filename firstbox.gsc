@@ -34,7 +34,7 @@ first_box()
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2, 2);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_mahemzm", "npc_mahem_base_holo", &"ZOMBIES_MAHEM", "none", "none", "none", undefined, 3);
                 }
-                if(numPlayer == 3 || numPlayer == 4) 
+            if(numPlayer == 3 || numPlayer == 4) 
                 {
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2, 4);
                 }
@@ -47,7 +47,7 @@ first_box()
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2, 2);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_linegunzm", "npc_zom_line_gun_holo", &"ZOMBIE_WEAPON_LINEGUN_PICKUP", "none", "none", "none", 2, 3);
                 }
-                if(numPlayer == 3 || numPlayer == 4) 
+            if(numPlayer == 3 || numPlayer == 4) 
                 {
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2, 4);
                 }
@@ -60,7 +60,7 @@ first_box()
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2, 2);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_tridentzm", "npc_zom_trident_base_holo", &"ZOMBIE_WEAPON_TRIDENT_PICKUP", "none", "none", "none", 2, 3);
                 }
-                if(numPlayer == 3 || numPlayer == 4) 
+            if(numPlayer == 3 || numPlayer == 4) 
                 {
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2, 4);
                 }
@@ -178,3 +178,4 @@ first_box()
         break;
     }
 }
+
