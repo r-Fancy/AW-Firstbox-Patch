@@ -13,173 +13,62 @@ first_box()
     level.magicboxweapons = [];
 
     switch (map) {
-        case "mp_zombie_lab":
-            if (numPlayer == 1) {
+        //[Outbreak]
+        case "mp_zombie_lab": 
+            for(i = 0; i < numPlayer; i++)
+                {
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_rhinozm", "npc_rhino_base_static_holo", &"ZOMBIES_RHINO", "none", "none", "none", undefined, 1);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2, 2);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_mahemzm", "npc_mahem_base_holo", &"ZOMBIES_MAHEM", "none", "none", "none", undefined, 3);
-            }
-            if (numPlayer == 2) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 6);
-            }
-            if (numPlayer == 3) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(6);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 7);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 8);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 9);
-            }
-            if (numPlayer == 4) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(6);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(7);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(8);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 9);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 10);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 11);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 12);
-            }
-
-        case "mp_zombie_brg":
-            if (numPlayer == 1) {
+                }
+            if(numPlayer == 3 || numPlayer == 4) 
+                {
+                maps\mp\zombies\_wall_buys::addmagicboxweapon("distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2, 4);
+                }
+            break;
+        //[Infection]            
+        case "mp_zombie_brg": 
+            for(i = 0; i < numPlayer; i++)
+                {
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_fusionzm", "npc_fusion_shotgun_base_holo", &"ZOMBIES_FUSION_RIFLE", "none", "none", "none", 2, 1);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2, 2);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_mahemzm", "npc_mahem_base_holo", &"ZOMBIES_MAHEM", "none", "none", "none", undefined, 3);
-            }
-            if (numPlayer == 2) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 6);
-            }
-            if (numPlayer == 3) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(6);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 7);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 8);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 9);
-            }
-            if (numPlayer == 4) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(6);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(7);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(8);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 9);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 10);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 11);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 12);
-            }
+                }
+                if(numPlayer == 3 || numPlayer == 4) 
+                {
+                maps\mp\zombies\_wall_buys::addmagicboxweapon("distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2, 4);
+                }
             break;
-
-        case "mp_zombie_ark":
-            if (numPlayer == 1) {
+        //[Carrier]    
+        case "mp_zombie_ark": 
+            for(i = 0; i < numPlayer; i++)
+                {
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_fusionzm", "npc_fusion_shotgun_base_holo", &"ZOMBIES_FUSION_RIFLE", "none", "none", "none", 2, 1);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2, 2);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_linegunzm", "npc_zom_line_gun_holo", &"ZOMBIE_WEAPON_LINEGUN_PICKUP", "none", "none", "none", 2, 3);
-            }
-            if (numPlayer == 2) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 6);
-            }
-            if (numPlayer == 3) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(6);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 7);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 8);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 9);
-            }
-            if (numPlayer == 4) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(6);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(7);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(8);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 9);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 10);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 11);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 12);
-            }
+                }
+                if(numPlayer == 3 || numPlayer == 4) 
+                {
+                maps\mp\zombies\_wall_buys::addmagicboxweapon("distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2, 4);
+                }
             break;
-
-        case "mp_zombie_h2o":
-            if (numPlayer == 1) {
+        //[Descent]            
+        case "mp_zombie_h2o": 
+            for(i = 0; i < numPlayer; i++)
+                {
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_rhinozm", "npc_rhino_base_static_holo", &"ZOMBIES_RHINO", "none", "none", "none", undefined, 1);
                 maps\mp\zombies\_wall_buys::addmagicboxweapon("dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_dlcgun4zm", "npc_blunderbuss_base_holo", &"ZOMBIE_WEAPONDLC4_GUN", "none", "none", "none", 2, 3);
-            }
-            if (numPlayer == 2) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 6);
-            }
-            if (numPlayer == 3) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(6);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 7);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 8);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 9);
-            }
-            if (numPlayer == 4) {
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 1);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 2);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 3);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 4);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(5);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(6);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(7);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(8);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 9);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 10);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 11);
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(undefined, 12);
-            }
+                maps\mp\zombies\_wall_buys::addmagicboxweapon("iw5_tridentzm", "npc_zom_trident_base_holo", &"ZOMBIE_WEAPON_TRIDENT_PICKUP", "none", "none", "none", 2, 3);
+                }
+                if(numPlayer == 3 || numPlayer == 4) 
+                {
+                maps\mp\zombies\_wall_buys::addmagicboxweapon("distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2, 4);
+                }
             break;
-            
         default:
-            iPrintLn("Incorrect map!");
+            iPrintLn("SOMETHING BROKE!");
             return;
-    }
+        }
 
     while (true)
     {
