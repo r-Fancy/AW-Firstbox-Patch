@@ -13,7 +13,9 @@ Done!
 **Normal Firstbox**
 
 > Open command box
+> 
 > Type `/fb` and your wanted weapon `/fb s12 cel13 trident blunderbuss monkey`
+> 
 > Press enter and fast_restart
 
 **Strict Firstbox**
