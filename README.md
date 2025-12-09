@@ -10,7 +10,13 @@ This patch is used to get a specific set of weapons in a specific set of order. 
 5. Put patch inside `scripts` folder.
 Done!
 
-**Extra Mention**
+**Normal Firstbox**
+
+> Open command box
+> Type `/fb` and your wanted weapon `/fb s12 cel13 trident blunderbuss monkey`
+> Press enter and fast_restart
+
+**Strict Firstbox**
 
 **Strict Weapon order**
 > "iw5_rhinozm", "npc_rhino_base_static_holo", &"ZOMBIES_RHINO", "none", "none", "none", undefined, 1 - First
@@ -25,7 +31,7 @@ Because the weapons are given in a strict order, everyone can only get their set
 
 **Weapon Limit**
 
-Some Weapons have a limit - WHICH IS NOT ALLOWED TO BE CHANGED. You know there's a limit when at the end it says 2 (means only 2 people can hold it). For Special Grenade that means 2 Nanos and 2 Drones are avaible
+Some Weapons have a limit - WHICH IS NOT ALLOWED TO BE CHANGED. You know there's a limit when at the end it says 2 (means only 2 people can hold it).
 
 **undefined**
 
