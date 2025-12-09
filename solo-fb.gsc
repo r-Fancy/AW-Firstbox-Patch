@@ -56,7 +56,7 @@ firstbox()
     if (numPlayer >= 2) {
         iPrintLn("This script only supports Solo");
         iPrintLn("Please download the latest firstbox release");
-        resetMagicbox;
+        thread resetMagicbox();
     }
 
     /* Split the dvar string into weapon array */
@@ -64,7 +64,7 @@ firstbox()
     
     if (weapons.size < 1) {
         iPrintLn("Firstbox needs at least 1 weapon!");
-        resetMagicbox;
+        thread resetMagicbox();
     }
 
     weapon1 = weapons[0];
