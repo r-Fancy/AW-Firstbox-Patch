@@ -3,12 +3,14 @@
 This patch is used to get a specific set of weapons in a specific set of order. It is allowed to use for competition according to zwr rule set & community vote (EXCEPT Easter Egg speedruns).
 
 **How to use**
-1. Download [s1x](https://mega.nz/folder/oLAViLiZ#3xUbLir3T9AdB51FqdhPlQ) files.
-2. Drag & drop into game folder.
-3. Create `s1x` folder if needed.
-4. Inside `s1x` folder create `scripts` folder.
-5. Put patch inside `scripts` folder.
+1. Download Firstbox Patch at `Realease`
+2. Download [s1-competitive](https://gitlab.com/EvelynYuki/Competitive-S1/-/blob/main/competitive-s1.exe).
+3. Put the s1-competitive exe inside your gamefolder and launch the exe.
+4. Put your firstbox patch inside Call of Duty Advanced Warfare\storage\scripts\mp.
+
 Done!
+
+(This also works with other clients, but the locations may differ)
 
 **Normal Firstbox**
 
