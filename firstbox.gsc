@@ -2,14 +2,27 @@
 
 main()
 {
-    setdvar("g_useholdtime", 0); /* For our controller players <3 */
+    setdvar("g_useholdtime", 0); 
     common_scripts\utility::create_dvar("fb", "crossbow monkey mahem");
 }
 
 init()
 {
+    level.originalMagicboxWeapon = [];
+    level thread storeMagicboxWeapon();
+
     level thread initWeaponDatabase();
     level thread firstbox();
+}
+
+storeMagicboxWeapon()
+{
+    wait 0.5;
+    
+    for(i = 0; i < level.magicboxweapons.size; i++)
+    {
+        level.originalMagicboxWeapons[i] = level.magicboxweapons[i];
+    }
 }
 
 initWeaponDatabase()
@@ -45,30 +58,20 @@ initWeaponDatabase()
 
 firstbox()
 {
-    level endon("game_ended");
     level waittill("zombie_wave_started");
-    iPrintLn("^:F^7irstbox Patch");
+    level endon("game_ended");
 
     level.magicboxweapons = [];
 
-    // check if no weapon specified
-    fb_dvar = getDvar("fb"); 
-    if (fb_dvar == "" || !isDefined(fb_dvar)) 
-    {
-        iPrintLn("Firstbox disabled - no weapons specified");
-        return;
-    }
-
-    // Split the dvar string into weapon array
+    fb_dvar = getDvar("fb");
     weapons = strtok(fb_dvar, " ");
     
-    if (weapons.size == 0) 
+    if (weapons.size < 3) 
     {
-        iPrintLn("Firstbox disabled - no valid weapons specified");
-        return;
+        iPrintLn("Firstbox disabled. Atleast 3 weapons needed");
+        level thread resetMagicbox();
     }
     
-    // Add weapons from dvar
     for (i = 0; i < weapons.size; i++)
     {
         addWeaponFromDvar(weapons[i], 2);
@@ -89,7 +92,6 @@ checkRound()
         if (round >= 20)   
         {
             resetMagicbox();
-            iPrintLn("^:F^7irstbox off");
             break;
         }
     }
@@ -98,117 +100,55 @@ checkRound()
 resetMagicbox()
 {
     level.magicboxweapons = [];
-    map = maps\mp\_utility::getmapname();
-
-    switch (map) 
+    
+    for(i = 0; i < level.originalMagicboxWeapons.size; i++)
     {
-    case "mp_zombie_lab":
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_rw1zm", "npc_rw1_main_base_static_holo", &"ZOMBIES_RW1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_vbrzm", "npc_vbr_base_static_holo", &"ZOMBIES_VBR", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_gm6zm", "npc_gm6_base_static_holo", &"ZOMBIES_GM6", "gm6scope", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_rhinozm", "npc_rhino_base_static_holo", &"ZOMBIES_RHINO", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_lsatzm", "npc_lsat_base_static_holo", &"ZOMBIES_LSAT", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_asawzm", "npc_ameli_base_static_holo", &"ZOMBIES_ASAW", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_ak12zm", "npc_ak12_base_static_holo", &"ZOMBIES_AK12", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_bal27zm", "npc_bal27_base_black_static_holo", &"ZOMBIES_BAL27", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_himarzm", "npc_himar_base_static_holo", &"ZOMBIES_IMR", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_asm1zm", "npc_asm1_base_static_holo", &"ZOMBIES_ASM1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_sn6zm", "npc_sn6_base_black_static_holo", &"ZOMBIES_SN6", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_sac3zm", "npc_sac3_base_static_holo", &"ZOMBIES_SAC3", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_fusionzm", "npc_fusion_shotgun_base_holo", &"ZOMBIES_FUSION_RIFLE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_exocrossbowzm", "npc_crossbow_base_static_holo", &"ZOMBIES_CROSSBOW", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_mahemzm", "npc_mahem_base_holo", &"ZOMBIES_MAHEM", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_em1zm", "npc_em1_base_static_holo", &"ZOMBIES_EM1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun1zm", "npc_dear_base_static_holo", &"ZOMBIES_DLC_GUN_1", "none", "none", "none" );
-    break;
-
-    case "mp_zombie_brg":
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_rw1zm", "npc_rw1_main_base_static_holo", &"ZOMBIES_RW1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_vbrzm", "npc_vbr_base_static_holo", &"ZOMBIES_VBR", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_gm6zm", "npc_gm6_base_static_holo", &"ZOMBIES_GM6", "gm6scope", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_rhinozm", "npc_rhino_base_static_holo", &"ZOMBIES_RHINO", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_lsatzm", "npc_lsat_base_static_holo", &"ZOMBIES_LSAT", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_asawzm", "npc_ameli_base_static_holo", &"ZOMBIES_ASAW", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_ak12zm", "npc_ak12_base_static_holo", &"ZOMBIES_AK12", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_bal27zm", "npc_bal27_base_black_static_holo", &"ZOMBIES_BAL27", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_himarzm", "npc_himar_base_static_holo", &"ZOMBIES_IMR", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_asm1zm", "npc_asm1_base_static_holo", &"ZOMBIES_ASM1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_sn6zm", "npc_sn6_base_black_static_holo", &"ZOMBIES_SN6", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_sac3zm", "npc_sac3_base_static_holo", &"ZOMBIES_SAC3", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_fusionzm", "npc_fusion_shotgun_base_holo", &"ZOMBIES_FUSION_RIFLE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_exocrossbowzm", "npc_crossbow_base_static_holo", &"ZOMBIES_CROSSBOW", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_mahemzm", "npc_mahem_base_holo", &"ZOMBIES_MAHEM", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_em1zm", "npc_em1_base_static_holo", &"ZOMBIES_EM1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun1zm", "npc_dear_base_static_holo", &"ZOMBIES_DLC_GUN_1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_microwavezm", "dlc_npc_microwave_gun_holo", &"ZOMBIES_MWG", "none", "none", "none", 1 );
-    break;
-
-    case "mp_zombie_ark":
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_linegunzm", "npc_zom_line_gun_holo", &"ZOMBIE_WEAPON_LINEGUN_PICKUP", "none", "none", "none", 2);
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_rw1zm", "npc_rw1_main_base_static_holo", &"ZOMBIES_RW1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_vbrzm", "npc_vbr_base_static_holo", &"ZOMBIES_VBR", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_gm6zm", "npc_gm6_base_static_holo", &"ZOMBIES_GM6", "gm6scope", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_rhinozm", "npc_rhino_base_static_holo", &"ZOMBIES_RHINO", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_lsatzm", "npc_lsat_base_static_holo", &"ZOMBIES_LSAT", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_asawzm", "npc_ameli_base_static_holo", &"ZOMBIES_ASAW", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_ak12zm", "npc_ak12_base_static_holo", &"ZOMBIES_AK12", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_bal27zm", "npc_bal27_base_black_static_holo", &"ZOMBIES_BAL27", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_himarzm", "npc_himar_base_static_holo", &"ZOMBIES_IMR", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_asm1zm", "npc_asm1_base_static_holo", &"ZOMBIES_ASM1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_sn6zm", "npc_sn6_base_black_static_holo", &"ZOMBIES_SN6", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_sac3zm", "npc_sac3_base_static_holo", &"ZOMBIES_SAC3", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_fusionzm", "npc_fusion_shotgun_base_holo", &"ZOMBIES_FUSION_RIFLE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_exocrossbowzm", "npc_crossbow_base_static_holo", &"ZOMBIES_CROSSBOW", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_mahemzm", "npc_mahem_base_holo", &"ZOMBIES_MAHEM", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_em1zm", "npc_em1_base_static_holo", &"ZOMBIES_EM1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun1zm", "npc_dear_base_static_holo", &"ZOMBIES_DLC_GUN_1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "repulsor_zombie", "dlc3_repulsor_device_01_holo", &"ZOMBIE_DLC3_REPULSOR", "none", "none", "none", 2);
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun3zm", "npc_m1_irons_base_static_holo", &"ZOMBIE_WEAPONDLC3_GUN", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun2zm", "npc_lmg_shotgun_base_static_holo", &"ZOMBIE_WEAPONDLC2_GUN", "none", "none", "none" );
-    break;
-
-    case "mp_zombie_h2o":
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_rw1zm", "npc_rw1_main_base_static_holo", &"ZOMBIES_RW1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_vbrzm", "npc_vbr_base_static_holo", &"ZOMBIES_VBR", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_gm6zm", "npc_gm6_base_static_holo", &"ZOMBIES_GM6", "gm6scope", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_rhinozm", "npc_rhino_base_static_holo", &"ZOMBIES_RHINO", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_lsatzm", "npc_lsat_base_static_holo", &"ZOMBIES_LSAT", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_asawzm", "npc_ameli_base_static_holo", &"ZOMBIES_ASAW", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_ak12zm", "npc_ak12_base_static_holo", &"ZOMBIES_AK12", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_bal27zm", "npc_bal27_base_black_static_holo", &"ZOMBIES_BAL27", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_himarzm", "npc_himar_base_static_holo", &"ZOMBIES_IMR", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_asm1zm", "npc_asm1_base_static_holo", &"ZOMBIES_ASM1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_sn6zm", "npc_sn6_base_black_static_holo", &"ZOMBIES_SN6", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_sac3zm", "npc_sac3_base_static_holo", &"ZOMBIES_SAC3", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_fusionzm", "npc_fusion_shotgun_base_holo", &"ZOMBIES_FUSION_RIFLE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "distraction_drone_zombie", "dlc_distraction_drone_01_holo", &"ZOMBIES_DISTRACTION_DRONE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "dna_aoe_grenade_zombie", "npc_exo_launcher_grenade_holo", &"ZOMBIES_DNA_AOE", "none", "none", "none", 2 );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_exocrossbowzm", "npc_crossbow_base_static_holo", &"ZOMBIES_CROSSBOW", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_mahemzm", "npc_mahem_base_holo", &"ZOMBIES_MAHEM", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_em1zm", "npc_em1_base_static_holo", &"ZOMBIES_EM1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun1zm", "npc_dear_base_static_holo", &"ZOMBIES_DLC_GUN_1", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_tridentzm", "npc_zom_trident_base_holo", &"ZOMBIE_WEAPON_TRIDENT_PICKUP", "none", "none", "none", 2  );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun4zm", "npc_blunderbuss_base_holo", &"ZOMBIE_WEAPONDLC4_GUN", "none", "none", "none", 2 );      
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "repulsor_zombie", "dlc3_repulsor_device_01_holo", &"ZOMBIE_DLC3_REPULSOR", "none", "none", "none", 2);
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun3zm", "npc_m1_irons_base_static_holo", &"ZOMBIE_WEAPONDLC3_GUN", "none", "none", "none" );
-        maps\mp\zombies\_wall_buys::addmagicboxweapon( "iw5_dlcgun2zm", "npc_lmg_shotgun_base_static_holo", &"ZOMBIE_WEAPONDLC2_GUN", "none", "none", "none" );
-    break;
+        weapon = level.originalMagicboxWeapons[i];
+        maps\mp\zombies\_wall_buys::addmagicboxweapon(
+            weapon["baseNameNoMP"],
+            weapon["displayModel"],
+            weapon["displayString"],
+            weapon["attachment1"],
+            weapon["attachment2"],
+            weapon["attachment3"],
+            weapon["limit"]
+        );
     }
+    
+    iPrintLn("^:F^7irstbox off");
 }
 
 addWeaponFromDvar(weaponName, order)
 {
-        if (isDefined(level.weaponData[weaponName])) {
-                weapon = level.weaponData[weaponName];
-                // Use the order as forceSelect parameter (7th parameter)
-                maps\mp\zombies\_wall_buys::addmagicboxweapon(weapon[0], weapon[1], weapon[2], weapon[3], weapon[4], weapon[5], order);
-        } else {
+    level waittill("zombie_wave_started");
+
+    if (isDefined(level.weaponData[weaponName])) 
+    {
+        weapon = level.weaponData[weaponName];
+
+    switch(weapon[0])
+    {
+    case "distraction_drone_zombie":
+        if(level.player getTacticalWeapon() == "distraction_drone_zombie")
+        {
+            return;
+        }
+    case "dna_aoe_grenade_zombie":
+        if(level.player getTacticalWeapon() == "dna_aoe_grenade_zombie")
+        {
+            return;
+        }
+    case "repulsor_zombie":
+        if(level.player getTacticalWeapon() == "repulsor_zombie")
+        {
+            return;
+        }
+        break;
+    }
+    maps\mp\zombies\_wall_buys::addmagicboxweapon(weapon[0], weapon[1], weapon[2], weapon[3], weapon[4], weapon[5], order);
+        } 
+        
+        else {
                 iPrintLn("Error: Unknown weapon '" + weaponName + "'");
         }
 }
