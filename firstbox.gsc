@@ -8,14 +8,14 @@ main()
 
 init()
 {
-    level.originalMagicboxWeapon = [];
-    level thread storeMagicboxWeapon();
+    level.originalMagicboxWeapons = [];
+    level thread storeMagicboxWeapons();
 
     level thread initWeaponDatabase();
     level thread firstbox();
 }
 
-storeMagicboxWeapon()
+storeMagicboxWeapons()
 {
     wait 0.5;
     
@@ -120,7 +120,6 @@ resetMagicbox()
 
 addWeaponFromDvar(weaponName, order)
 {
-    level waittill("zombie_wave_started");
 
     if (isDefined(level.weaponData[weaponName])) 
     {
@@ -133,11 +132,15 @@ addWeaponFromDvar(weaponName, order)
         {
             return;
         }
+        break;
+
     case "dna_aoe_grenade_zombie":
         if(level.player getTacticalWeapon() == "dna_aoe_grenade_zombie")
         {
             return;
         }
+        break;
+
     case "repulsor_zombie":
         if(level.player getTacticalWeapon() == "repulsor_zombie")
         {
@@ -152,3 +155,4 @@ addWeaponFromDvar(weaponName, order)
                 iPrintLn("Error: Unknown weapon '" + weaponName + "'");
         }
 }
+
