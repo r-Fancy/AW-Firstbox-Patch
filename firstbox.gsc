@@ -60,6 +60,7 @@ firstbox()
 {
     level waittill("zombie_wave_started");
     level endon("game_ended");
+    iPrintLn("^:F^7irstbox Patch");
 
     level.magicboxweapons = [];
 
@@ -68,8 +69,8 @@ firstbox()
     
     if (weapons.size < 3) 
     {
-        iPrintLn("Firstbox disabled. Atleast 3 weapons needed");
-        level thread resetMagicbox();
+       iPrintLn("Firstbox disabled. Atleast 3 weapons needed");
+       thread resetMagicbox();
     }
     
     for (i = 0; i < weapons.size; i++)
@@ -118,37 +119,39 @@ resetMagicbox()
     iPrintLn("^:F^7irstbox off");
 }
 
-addWeaponFromDvar(weaponName, order)
+addWeaponFromDvar(weaponName)
 {
 
     if (isDefined(level.weaponData[weaponName])) 
     {
         weapon = level.weaponData[weaponName];
 
+
     switch(weapon[0])
     {
     case "distraction_drone_zombie":
-        if(level.player getTacticalWeapon() == "distraction_drone_zombie")
+        if(level.player getTacticalWeapon() == "distraction_drone_zombie" && (level.player hasWeapon("distraction_drone_zombie") ) )
         {
             return;
         }
         break;
 
     case "dna_aoe_grenade_zombie":
-        if(level.player getTacticalWeapon() == "dna_aoe_grenade_zombie")
+        if(level.player getTacticalWeapon() == "dna_aoe_grenade_zombie" && (level.player hasWeapon("dna_aoe_grenade_zombie") ) )
         {
             return;
         }
         break;
 
     case "repulsor_zombie":
-        if(level.player getTacticalWeapon() == "repulsor_zombie")
+        if(level.player getTacticalWeapon() == "repulsor_zombie" && (level.player hasWeapon("repulsor_zombie") ) )
         {
             return;
         }
         break;
     }
-    maps\mp\zombies\_wall_buys::addmagicboxweapon(weapon[0], weapon[1], weapon[2], weapon[3], weapon[4], weapon[5], order);
+
+    maps\mp\zombies\_wall_buys::addmagicboxweapon(weapon[0], weapon[1], weapon[2], weapon[3], weapon[4], weapon[5]);
         } 
         
         else {
