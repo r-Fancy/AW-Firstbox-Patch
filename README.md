@@ -12,7 +12,7 @@ Done!
 
 (This also works with other clients, but the locations may differ)
 
-**Normal Firstbox**
+**Firstbox**
 
 > Open command box
 > 
@@ -23,16 +23,6 @@ Done!
 **Weapon Limit**
 
 Some Weapons have a limit - which is not allowed to be changed. example: trident, limbo, blunderbuss... (Simply it means u cannot add something twice like /fb trident trident, as it means everyone now can have trident, thats a no no, only add weapons once)
-
-**Strict Firstbox(solo.gsc)**
-
-**Strict Weapon order**
-> /fb s12 (1) nano(2) mahem(3) - You enter the command without the () this is just a example
-> /fb s12 nano mahem - this is how u do it
-
-**Coop**
-
-Not avaible for strict firstbox due to several issues :/ 
 
 **Discord**
 
