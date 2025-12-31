@@ -32,6 +32,8 @@ Some Weapons have a limit - which is not allowed to be changed. example: trident
 
 [Zi0MIX](https://gist.github.com/Zi0MIX) - *Fixed version of first box patch*
 
+[DaddyDontStop](#) - *Additional support*
+
 [romain_lu](https://www.twitch.tv/romain_lu) - *Weapon list & Tester*
 
 [llGaryyll](https://www.youtube.com/@llGaryyll) - *Feedback & Tester*
