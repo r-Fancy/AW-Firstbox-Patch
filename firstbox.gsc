@@ -61,9 +61,7 @@ firstbox()
     level waittill("zombie_wave_started");
     level endon("game_ended");
     iPrintLn("^:F^7irstbox Patch");
-
     level.magicboxweapons = [];
-
     fb_dvar = getDvar("fb");
     weapons = strtok(fb_dvar, " ");
     
@@ -73,9 +71,8 @@ firstbox()
        thread resetMagicbox();
     }
     
-    for (i = 0; i < weapons.size; i++)
-    {
-        addWeaponFromDvar(weapons[i], 2);
+    for(i = 0; i < weapons.size; i++) {
+        addWeaponFromDvar(weapons[i], i + 1);
     }
     
     level thread checkRound();
@@ -121,41 +118,18 @@ resetMagicbox()
 
 addWeaponFromDvar(weaponName)
 {
-
-    if (isDefined(level.weaponData[weaponName])) 
-    {
+    if (isDefined(level.weaponData[weaponName])) {
         weapon = level.weaponData[weaponName];
 
-
-    switch(weapon[0])
+    if( (weapon[0] == "distraction_drone_zombie" || weapon[0] == "dna_aoe_grenade_zombie" || weapon[0] == "repulsor_zombie") && 
+    (level.player getTacticalWeapon() == "distraction_drone_zombie" || level.player getTacticalWeapon() == "dna_aoe_grenade_zombie" || level.player getTacticalWeapon() == "repulsor_zombie"))
     {
-    case "distraction_drone_zombie":
-        if(level.player getTacticalWeapon() == "distraction_drone_zombie" && (level.player hasWeapon("distraction_drone_zombie") ) )
-        {
-            return;
-        }
-        break;
-
-    case "dna_aoe_grenade_zombie":
-        if(level.player getTacticalWeapon() == "dna_aoe_grenade_zombie" && (level.player hasWeapon("dna_aoe_grenade_zombie") ) )
-        {
-            return;
-        }
-        break;
-
-    case "repulsor_zombie":
-        if(level.player getTacticalWeapon() == "repulsor_zombie" && (level.player hasWeapon("repulsor_zombie") ) )
-        {
-            return;
-        }
-        break;
+    return;
     }
-
-    maps\mp\zombies\_wall_buys::addmagicboxweapon(weapon[0], weapon[1], weapon[2], weapon[3], weapon[4], weapon[5]);
-        } 
-        
-        else {
-                iPrintLn("Error: Unknown weapon '" + weaponName + "'");
-        }
+        maps\mp\zombies\_wall_buys::addmagicboxweapon(weapon[0], weapon[1], weapon[2], weapon[3], weapon[4], weapon[5], weapon[6]);
+    } 
+    else {
+        iPrintLn("Error: Unknown weapon '" + weaponName + "'");
+    }
 }
 
