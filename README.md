@@ -20,10 +20,6 @@ Done!
 > 
 > Press enter and fast_restart
 
-**Weapon Limit**
-
-Some Weapons have a limit - which is not allowed to be changed. example: trident, limbo, blunderbuss... (Simply it means u cannot add something twice like /fb trident trident, as it means everyone now can have trident, thats a no no, only add weapons once)
-
 **Discord**
 
 [Join Server](https://discord.com/invite/TesFghu28v)
