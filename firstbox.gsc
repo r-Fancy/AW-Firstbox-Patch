@@ -3,7 +3,7 @@
 main()
 {
     setdvar("g_useholdtime", 0); 
-    common_scripts\utility::create_dvar("fb", "crossbow monkey mahem");
+    common_scripts\utility::create_dvar("fb", "crossbow nano mahem monkey");
 }
 
 init()
@@ -44,7 +44,7 @@ initWeaponDatabase()
     level.weaponData["ohm"] = ["iw5_dlcgun2zm", "npc_lmg_shotgun_base_static_holo", &"ZOMBIE_WEAPONDLC2_GUN", "none", "none", "none", undefined];
     level.weaponData["m1"] = ["iw5_dlcgun3zm", "npc_m1_irons_base_static_holo", &"ZOMBIE_WEAPONDLC3_GUN", "none", "none", "none", undefined];
     level.weaponData["s12"] = ["iw5_rhinozm", "npc_rhino_base_static_holo", &"ZOMBIES_RHINO", "none", "none", "none", undefined];
-    level.weaponData["cel13"] = ["iw5_fusionzm", "npc_fusion_shotgun_base_holo", &"ZOMBIES_FUSION_RIFLE", "none", "none", "none", 2];
+    level.weaponData["cel3"] = ["iw5_fusionzm", "npc_fusion_shotgun_base_holo", &"ZOMBIES_FUSION_RIFLE", "none", "none", "none", 2];
     level.weaponData["crossbow"] = ["iw5_exocrossbowzm", "npc_crossbow_base_static_holo", &"ZOMBIES_CROSSBOW", "none", "none", "none", undefined];
     level.weaponData["mahem"] = ["iw5_mahemzm", "npc_mahem_base_holo", &"ZOMBIES_MAHEM", "none", "none", "none", undefined];
     level.weaponData["magnetron"] = ["iw5_microwavezm", "dlc_npc_microwave_gun_holo", &"ZOMBIES_MWG", "none", "none", "none", 1];
@@ -58,36 +58,36 @@ initWeaponDatabase()
 
 firstbox()
 {
-    level waittill("zombie_wave_started");
-    level endon("game_ended");
-    iPrintLn("^:F^7irstbox Patch");
+    level endon( "game_ended" );
+    level waittill( "zombie_wave_started" );
     level.magicboxweapons = [];
-    fb_dvar = getDvar("fb");
+    iPrintLn( "^:F^7irstbox Patch" );
+    map = maps\mp\_utility::getmapname();
+    fb_dvar = getDvar("fb"); 
     weapons = strtok(fb_dvar, " ");
     
-    if (weapons.size < 3) 
+    if (weapons.size < 1) 
     {
-       iPrintLn("Firstbox disabled. Atleast 3 weapons needed");
-       thread resetMagicbox();
+        iPrintLn("Firstbox needs at least 1 weapon!");
+        thread resetMagicbox();
     }
-    
-    for(i = 0; i < weapons.size; i++) {
+
+    for(i = 0; i < weapons.size; i++) 
+    {
         addWeaponFromDvar(weapons[i], i + 1);
     }
-    
     level thread checkRound();
 }
 
 checkRound()
 {
     level endon("game_ended");
-    
     while (true)
     {
         round = level.wavecounter;
         level waittill("zombie_wave_ended");
 
-        if (round >= 20)   
+        if (round >= 19)   
         {
             resetMagicbox();
             break;
@@ -98,7 +98,6 @@ checkRound()
 resetMagicbox()
 {
     level.magicboxweapons = [];
-    
     for(i = 0; i < level.originalMagicboxWeapons.size; i++)
     {
         weapon = level.originalMagicboxWeapons[i];
@@ -112,24 +111,18 @@ resetMagicbox()
             weapon["limit"]
         );
     }
-    
     iPrintLn("^:F^7irstbox off");
 }
 
-addWeaponFromDvar(weaponName)
+addWeaponFromDvar(weaponName, order)
 {
-    if (isDefined(level.weaponData[weaponName])) {
-        weapon = level.weaponData[weaponName];
-
-    if( (weapon[0] == "distraction_drone_zombie" || weapon[0] == "dna_aoe_grenade_zombie" || weapon[0] == "repulsor_zombie") && 
-    (level.player getTacticalWeapon() == "distraction_drone_zombie" || level.player getTacticalWeapon() == "dna_aoe_grenade_zombie" || level.player getTacticalWeapon() == "repulsor_zombie"))
+    if (isDefined(level.weaponData[weaponName])) 
     {
-    return;
-    }
-        maps\mp\zombies\_wall_buys::addmagicboxweapon(weapon[0], weapon[1], weapon[2], weapon[3], weapon[4], weapon[5], weapon[6]);
+        weapon = level.weaponData[weaponName];
+        maps\mp\zombies\_wall_buys::addmagicboxweapon(weapon[0], weapon[1], weapon[2], weapon[3], weapon[4], weapon[5], weapon[6], order);
     } 
-    else {
+    else 
+    {
         iPrintLn("Error: Unknown weapon '" + weaponName + "'");
     }
 }
-
